@@ -2,7 +2,7 @@
 
 #define MAX_TYPE_LENGTH 30
 #define FLAG_URGENT 0x01   // 0000 0001
-#define FLAG_READ   0x02   // 0000 0010
+#define FLAG_CONFIDENTIAL   0x02   // 0000 0010
 
 #include <stdio.h>
 
@@ -43,4 +43,23 @@ Message* create_message(const char *type, const char *sender, const char *receiv
  * @param msg A pointer to the Message structure that contains the message details to be sent.
  */
 void send_message(const Message *msg);
+
+/**
+ * receive_message
+ * 
+ * @brief This function simulates the reception of a message. It prints the message details, checks for specific flags, 
+ * and invokes the appropriate handler function based on the message type.
+ * 
+ * @param msg A pointer to the Message structure representing the received message. The structure contains the message's type, 
+ * sender ID, receiver ID, language, content, flags, and possibly coordinates.
+ * 
+ * The function performs the following actions:
+ * - Prints the details of the received message.
+ * - Checks if the message has the "urgent" or "read" flag set and prints corresponding information.
+ * - Calls the `handle_message` function, passing the appropriate handler function depending on the message type:
+ *   - If `msg->type` is "emergency", it uses `handle_emergency`.
+ *   - If `msg->type` is "location", it uses `handle_location`.
+ *   - If the message type is unknown, it prints an error message.
+ */
+void receive_message(const Message *msg);
 

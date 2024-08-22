@@ -42,7 +42,13 @@ void send_message(const Message *msg) {
     printf("Receiver's id: %s\n", msg->receiver_id);
     printf("Language: %s\n", msg->language);
     printf("Message: %s\n", msg->message);
-    printf("Flags: 0x%x\n", msg->flags);
+    
+    if (msg->flags & FLAG_URGENT) { 
+        printf("The message to be sent is urgent.\n");
+    }
+    if (msg->flags & FLAG_CONFIDENTIAL) {
+        printf("The message to be sent is confidential.\n");
+    } 
 
     printf("Menssage sent succesfully.\n");
 }
@@ -56,7 +62,13 @@ void receive_message(const Message *msg) {
     printf("Receiver's id: %s\n", msg->receiver_id);
     printf("Language: %s\n", msg->language);
     printf("Message: %s\n", msg->message);
-    printf("Flags: 0x%x\n", msg->flags);    
+    
+    if (msg->flags & FLAG_URGENT) {
+        printf("The message received is urgent.\n");
+    }
+    if (msg->flags & FLAG_CONFIDENTIAL) {
+        printf("The message received is confidential.\n");
+    } 
 
     if (strcmp(msg->type, "emergency") == 0) {
         handle_message(msg, handle_emergency);
